@@ -56,43 +56,44 @@ app.controller("formCtrl", function ($scope, job) {
                 console.log(response)
                 $scope.offres = response.jobs;
                 $scope.jobCount = response.totalCount;
-                
             });
 
     }
 
-    $scope.getDateFromString = function(date){
+    $scope.getDateFromString = function (date) {
         console.log(new Date(Date.parse(response.jobs[0].updated)).toLocaleDateString("fr-FR"))
         return new Date(Date.parse(response.jobs[0].updated)).toLocaleDateString("fr-FR")
     }
 
-    $scope.goToPage = function(page) {
+    $scope.goToPage = function (page) {
 
-        if (typeof page == "string"){
+        if (typeof page == "string") {
             $scope.page = Math.floor($scope.jobCount / 20)
-        }else{
-            if (page > 0 && page < $scope.jobCount / 20){
+        } else {
+            if (page > 0 && page < $scope.jobCount / 20) {
                 $scope.page = page
-            }else{
+            } else {
                 $scope.page = 1
             }
         }
-        
+
         $scope.searchJob()
     }
 
-    $scope.saveOffre = function(offre) {
+    $scope.saveOffre = function (offre) {
         let savedOffers = JSON.parse(localStorage.getItem("offres"));
 
         console.log(savedOffers)
 
         if (!savedOffers) {
-            savedOffers = [{offres: []}];
+            savedOffers = {offres: [offre] };
             console.log(savedOffers)
+            localStorage.setItem("offres", JSON.stringify(savedOffers));
+        } else {
+            savedOffers.offres.push(offre);
+            console.log(savedOffers)
+            localStorage.setItem("offres", JSON.stringify(savedOffers));
         }
-        savedOffers.offres.push(offre);
-        console.log(savedOffers)
-        localStorage.setItem(JSON.stringify(offres));
     }
 
 });
