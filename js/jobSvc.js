@@ -4,18 +4,19 @@ app.service("job", function ($http) {
     this.url = "https://fr.jooble.org/api/";
     this.recherche = function (searchObject) {
 
-        // return $http({
-        //     method: "POST",
-        //     url: `https://fr.jooble.org/api/${this.apiKey}`,
-        //     data: {
-        //         keywords: searchObject.emploi,
-        //         location: searchObject.ville,
-        //         radius: searchObject.rayon,
-        //         salary: searchObject.salaire,
-        //         page: 1
-        //     }
-        // })
-        return $http.post(this.url+this.apiKey)
+        return $http({
+            method: "POST",
+            url: `https://fr.jooble.org/api/${this.apiKey}`,
+            data: {
+                keywords: searchObject.emploi,
+                location: searchObject.ville,
+                radius: searchObject.rayon,
+                salary: searchObject.salaire,
+                page: searchObject.page,
+                searchMode: searchObject.searchMode
+            }
+        })
+        // return $http.post(this.url+this.apiKey)
             .then(function (response) {
                 return response.data;
             })
