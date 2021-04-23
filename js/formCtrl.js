@@ -1,4 +1,4 @@
-app.controller("formCtrl", function ($scope, job) {
+app.controller("formCtrl", function ($scope, job, $sce) {
     $scope.title = "Formulaire";
     $scope.emploi;
     $scope.ville;
@@ -54,6 +54,9 @@ app.controller("formCtrl", function ($scope, job) {
         job.recherche($scope.jobSearch)
             .then(function (response) {
                 console.log(response)
+                response.jobs.forEach(function(j){
+                    j.snippet = $sce.trustAsHtml(j.snippet);
+                });
                 $scope.offres = response.jobs;
                 $scope.jobCount = response.totalCount;
             });

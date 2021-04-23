@@ -6,7 +6,7 @@
             <li class="list-group-item">Titre : {{offre.title}}</li>
             <li class="list-group-item">Lieux : {{offre.location}}</li>
             <li class="list-group-item">Type de contrat : {{offre.type}}</li>
-            <li class="list-group-item">Description : {{offre.snippet}}</li>
+            <li class="list-group-item" ng-bind-html="offre.snippet">Description : </li>
             <li class="list-group-item">Salaire : {{offre.salary ? offre.salary : "Salaire non renseigné"}}</li>
             <li class="list-group-item">Entreprise : {{offre.company}}</li>
             <!-- <li class="list-group-item">mise à jour : {{getDateFromString(offre.updated)}}</li> -->
@@ -14,6 +14,7 @@
             <li class="list-group-item text-center">
                 <a href="{{offre.link}}" target="_parent"><button type="button" class="btn btn-primary">Offre
                         complète</button></a>
+                        <button type="button" class="btn btn-primary" ng-click="removeAnnonce(offre)">Supprimer</button>
             </li>
         </ul>
     </div>
