@@ -1,16 +1,21 @@
 app.service("job", function ($http) {
 
+    this.apiKey = "214a72e6-d707-4354-8b25-4b55490ea13a";
+    this.url = "https://fr.jooble.org/api/";
+    this.recherche = function (searchObject) {
 
-    this.recherche = function(searchObject) {
-
-        return $http({
-            method: "GET",
-            url: "https://geo.api.gouv.fr/communes",
-            params: {
-                nom: cityName,
-                fields: "departement,centre,contour"
-            }
-        })
+        // return $http({
+        //     method: "POST",
+        //     url: `https://fr.jooble.org/api/${this.apiKey}`,
+        //     data: {
+        //         keywords: searchObject.emploi,
+        //         location: searchObject.ville,
+        //         radius: searchObject.rayon,
+        //         salary: searchObject.salaire,
+        //         page: 1
+        //     }
+        // })
+        return $http.post(this.url+this.apiKey)
             .then(function (response) {
                 return response.data;
             })
