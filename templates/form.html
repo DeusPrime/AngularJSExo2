@@ -14,13 +14,16 @@
       </div>
       <div class="form-group">
         <label>Rayon</label>
-        <select class="form-control" ng-model="rayon" ng-options="" name="rayon" >
+        <select class="form-control" ng-model="rayon" ng-options="ray in rayons" name="rayon"></select>
         <small class="form-text text-muted">Error</small>
       </div>
       <div class="form-group">
         <label>Slaire minimum</label>
         <input type="number" class="form-control" ng-model="salaire" min="1000" max="5000" name="salaire" >
         <small class="form-text text-muted">Error</small>
+        <div ng-if="jobSearch.salaire.$touched && (jobSearch.salaire.$error.min || jobSearch.salaire.$error.max)" class="alert alert-danger">
+            Le salaire minimum doit être compris entre 1000 et 5000
+        </div>
       </div>
       <div class="form-group">
         <label>Filtres</label>
@@ -45,7 +48,7 @@
     </div>
 
       <div class="text-center">
-        <button type="submit" class="btn btn-primary" ng-click="searchJob()">Envoyer</button>
+        <button type="submit" class="btn btn-primary" ng-click="searchJob()" ng-disable="jobSearch.$pristine && jobSearch.$invalid">Envoyer</button>
         <button type="reset" class="btn btn-secondary" ng-click="reinitForm()">Réinitialiser</button>
       </div>
     
