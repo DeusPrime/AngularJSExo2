@@ -24,5 +24,14 @@ app.config(function($routeProvider){
     .otherwise({
         redirectTo: "/"
     });
+});
 
-})
+app.filter("vraidate", function(){
+    return function(date){
+        let dte = new Date(date)
+        let jour = dte.getDay();
+        let mois = dte.getMonth() + 1;
+        let annee = dte.getFullYear();
+        return String(jour + "/" + mois + "/" + annee)
+    }
+});
